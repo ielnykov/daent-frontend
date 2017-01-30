@@ -1,0 +1,174 @@
+﻿@model CleaningService.Models.client
+
+@{
+    ViewBag.Title = String.Format("Client \"{0}, {1}\"", Model.last_name, Model.first_name);
+}
+
+<h2>@String.Format("Client \"{0}, {1}\"", Model.last_name, Model.first_name);</h2>
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+        <div class="text-right">
+            <a href="@Url.Action("Edit", new { id = Model.id })" class="btn btn-sm btn-info">
+                <i class="fa fa-pencil"></i> Edit
+            </a>
+            <a href="@Url.Action("Index")" class="btn btn-sm btn-default">
+                <i class="fa fa-list"></i> Back to List
+            </a>
+        </div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#general" aria-controls="general" role="tab" data-toggle="tab">General</a></li>
+            <li role="presentation"><a href="#addresses" aria-controls="addresses" role="tab" data-toggle="tab">Addresses</a></li>
+            <li role="presentation"><a href="#eMails" aria-controls="eMails" role="tab" data-toggle="tab">E-mails</a></li>
+            <li role="presentation"><a href="#phoneNumbers" aria-controls="phoneNumbers" role="tab" data-toggle="tab">Phone Numbers</a></li>
+            <li role="presentation"><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="general">
+
+                <table class="table table-bordered table-striped table-tabbed table-view">
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <td width="200px">
+                                @Html.DisplayNameFor(model => model.first_name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.first_name)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.last_name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.last_name)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.company)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.company)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="addresses">
+
+                @foreach (var address in Model.addresses)
+                {
+                    <table class="table table-bordered table-striped table-tabbed">
+                        <thead>
+                            <th>@Html.DisplayNameFor(model => address.addr)</th>
+                            <th>@Html.DisplayNameFor(model => address.city)</th>
+                            <th>@Html.DisplayNameFor(model => address.postal_code)</th>
+                            <th>@Html.DisplayNameFor(model => address.country_code)</th>
+                            <th>@Html.DisplayNameFor(model => address.type)</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => address.addr)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => address.city)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => address.postal_code)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => address.country.name)
+                                </td>
+                                <td class="text-center">
+                                    @Html.Raw(address.typeIcon)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                @if (Model.addresses.Count == 0) { <div class="table-tabbed-no-records">No records</div> }
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="eMails">
+
+                @foreach (var email in Model.emails)
+                {
+                    <table class="table table-bordered table-striped table-tabbed">
+                        <thead>
+                            <th>@Html.DisplayNameFor(model => email.value)</th>
+                            <th>@Html.DisplayNameFor(model => email.type)</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => email.value)
+                                </td>
+                                <td class="text-center">
+                                    @Html.Raw(email.typeIcon)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                @if (Model.emails.Count == 0) { <div class="table-tabbed-no-records">No records</div> }
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="phoneNumbers">
+
+                @foreach (var phoneNumber in Model.phone_numbers)
+                {
+                    <table class="table table-bordered table-striped table-tabbed">
+                        <thead>
+                            <th>@Html.DisplayNameFor(model => phoneNumber.value)</th>
+                            <th>@Html.DisplayNameFor(model => phoneNumber.type)</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => phoneNumber.value)
+                                </td>
+                                <td class="text-center">
+                                    @Html.Raw(phoneNumber.typeIcon)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                @if (Model.phone_numbers.Count == 0) { <div class="table-tabbed-no-records">No records</div> }
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="orders">
+
+                @foreach (var order in Model.orders)
+                {
+                    <table class="table table-bordered table-striped table-tabbed">
+                        <thead>
+                            <th>@Html.DisplayNameFor(model => order.id)</th>
+                            <th>@Html.DisplayNameFor(model => order.start_date)</th>
+                            <th>@Html.DisplayNameFor(model => order.end_date)</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    #@Html.DisplayFor(model => order.id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => order.start_date) @Html.DisplayFor(model => order.start_time)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => order.end_date) @Html.DisplayFor(model => order.end_time)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                @if (Model.orders.Count == 0) { <div class="table-tabbed-no-records">No records</div> }
+
+            </div>
+        </div>
+    </div>
+</div>

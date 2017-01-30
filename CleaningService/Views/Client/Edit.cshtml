@@ -1,0 +1,246 @@
+﻿@model CleaningService.Models.client
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+    
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            <div class="text-right">
+                <a href="@Url.Action("Edit", new { id = Model.id })" class="btn btn-sm btn-info">
+                    <i class="fa fa-pencil"></i> Edit
+                </a>
+                <a href="@Url.Action("Index")" class="btn btn-sm btn-default">
+                    <i class="fa fa-list"></i> Back to List
+                </a>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#general" aria-controls="general" role="tab" data-toggle="tab">General</a></li>
+                <li role="presentation"><a href="#addresses" aria-controls="addresses" role="tab" data-toggle="tab">Addresses</a></li>
+                <li role="presentation"><a href="#eMails" aria-controls="eMails" role="tab" data-toggle="tab">E-mails</a></li>
+                <li role="presentation"><a href="#phoneNumbers" aria-controls="phoneNumbers" role="tab" data-toggle="tab">Phone Numbers</a></li>
+                <li role="presentation"><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="general">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal form-tabbed">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.first_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.first_name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.first_name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.last_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.last_name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.company, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.company, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.company, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa fa-floppy-o"></i> Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="addresses">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="panel-group panel-group-tabbed" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <i class="fa fa-plus"></i> Add new address
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+
+                                        <div class="form-horizontal">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.first_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.first_name, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.first_name, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.last_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.last_name, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.company, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.company, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.company, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="fa fa-floppy-o"></i> Save
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+                    @foreach (var address in Model.addresses)
+                    {
+                        <table class="table table-bordered table-striped table-tabbed">
+                            <thead>
+                            <th>@Html.DisplayNameFor(model => address.addr)</th>
+                            <th>@Html.DisplayNameFor(model => address.city)</th>
+                            <th>@Html.DisplayNameFor(model => address.postal_code)</th>
+                            <th>@Html.DisplayNameFor(model => address.country_code)</th>
+                            <th>@Html.DisplayNameFor(model => address.type)</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(model => address.addr)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => address.city)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => address.postal_code)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => address.country.name)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.Raw(address.typeIcon)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                    @if (Model.addresses.Count == 0) { <div class="table-tabbed-no-records">No records</div> }
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="eMails">
+
+                    @foreach (var email in Model.emails)
+                {
+                        <table class="table table-bordered table-striped table-tabbed">
+                            <thead>
+                            <th>@Html.DisplayNameFor(model => email.value)</th>
+                            <th>@Html.DisplayNameFor(model => email.type)</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(model => email.value)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.Raw(email.typeIcon)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                    @if (Model.emails.Count == 0)
+                    { <div class="table-tabbed-no-records">No records</div> }
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="phoneNumbers">
+
+                    @foreach (var phoneNumber in Model.phone_numbers)
+                {
+                        <table class="table table-bordered table-striped table-tabbed">
+                            <thead>
+                            <th>@Html.DisplayNameFor(model => phoneNumber.value)</th>
+                            <th>@Html.DisplayNameFor(model => phoneNumber.type)</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(model => phoneNumber.value)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.Raw(phoneNumber.typeIcon)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                    @if (Model.phone_numbers.Count == 0)
+                    { <div class="table-tabbed-no-records">No records</div> }
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="orders">
+
+                    @foreach (var order in Model.orders)
+                {
+                        <table class="table table-bordered table-striped table-tabbed">
+                            <thead>
+                            <th>@Html.DisplayNameFor(model => order.id)</th>
+                            <th>@Html.DisplayNameFor(model => order.start_date)</th>
+                            <th>@Html.DisplayNameFor(model => order.end_date)</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        #@Html.DisplayFor(model => order.id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => order.start_date) @Html.DisplayFor(model => order.start_time)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => order.end_date) @Html.DisplayFor(model => order.end_time)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                    @if (Model.orders.Count == 0)
+                    { <div class="table-tabbed-no-records">No records</div> }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
